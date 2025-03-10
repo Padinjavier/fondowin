@@ -31,6 +31,23 @@
     <script>
         const background = document.getElementById('background');
         let isMouseDown = false;
+        let autoFilterInterval;
+
+        // Función para cambiar el filtro automáticamente
+        function applyAutoFilter() {
+            let hue = 0;
+            const speed = 1; // Velocidad del cambio de tono (ajusta según sea necesario)
+
+            autoFilterInterval = setInterval(() => {
+                if (!isMouseDown) {
+                    hue = (hue + speed) % 360; // Ciclo de 0 a 360 grados
+                    background.style.filter = `hue-rotate(${hue}deg) saturate(1.5)`;
+                }
+            }, 60); // Intervalo de tiempo para el cambio automático
+        }
+
+        // Iniciar el cambio automático de filtro
+        applyAutoFilter();
 
         // Evento para detectar cuando se hace clic
         document.addEventListener('mousedown', () => {
